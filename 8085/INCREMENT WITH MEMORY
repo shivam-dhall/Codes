@@ -1,0 +1,15 @@
+                             MVI A,01
+                             
+                             MVI H,0A
+                             
+                             LXI B,2060
+                             
+                             
+                             STAX B
+                             INX B
+                             INR A
+                             DCR H
+                             JNZ 2007
+                             
+                             
+                             HLT
