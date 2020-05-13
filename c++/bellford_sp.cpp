@@ -2,8 +2,6 @@
 using namespace std;
 
 
-}
-
 void bellman_ford(int **a, int *p, int n)
 {
   int l;
