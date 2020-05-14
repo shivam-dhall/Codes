@@ -1,20 +1,36 @@
 #include<iostream>
 using namespace std;
 
+int min_dij(int *p,int *s,int n)
+{
+  int t=100,t1;
+
+  for(int i=0;i<n;i++)
+  {
+    if(p[i]<t && p[i]!=0 && s[i]!=1)
+       t=p[i],t1=i;;
+  }
+  if(t==99)
+    return -1;
+  else
+    return t1;
+}
 
 // replace int a[][] to int **a if using runtime size
 
-void bellman_ford(int a[][4], int *p, int n)
+void dijkstra(int a[][9], int *p, int n)
 {
-  int l;
+  int state[n];
+  int l,min_index;
   cout<<endl<<"Enter source vertex [Starting from 0] : ";
   cin>>l;
+  min_index=l;
   for(int i=0;i<n;i++)
   {
     if(i==l)
-      p[i]=0;
+      p[i]=0, state[i]=1;
     else
-      p[i]=99;
+      p[i]=99, state[i]=0;
   }
 
   for(int i=0;i<n;i++)
@@ -26,20 +42,29 @@ void bellman_ford(int a[][4], int *p, int n)
     }
   }
 
-  for(int k=0;k<n-1;k++)
+  for(int lp=1;lp<n;lp++)
   {
-    for(int i=0;i<n;i++)
+
+    min_index=min_dij(p,state,n);
+    state[min_index]=1;
+
+    cout<<min_index<<endl;
+
+    for(int j=0;j<n;j++)
     {
-      for(int j=0;j<n;j++)
+      if(a[min_index][j]!=0 && state[j]!=1)
       {
-        if(a[i][j]!=0)
-        {
-          if(a[i][j]+p[i]<p[j])
-            p[j]=a[i][j]+p[i];
-        }
+        if(a[min_index][j]+p[min_index]<p[j])
+          p[j]=a[min_index][j]+p[min_index];
       }
     }
   }
+
+  for(int i=0;i<n;i++)
+    cout<<state[i]<<" ";
+//  cout<<min_index;
+  cout<<endl;
+
 }
 
 void disp(int *p, int n)
@@ -67,6 +92,7 @@ int main()
               { 8, 11, 0, 0, 0, 0, 1, 0, 7 },
               { 0, 0, 2, 0, 0, 0, 6, 7, 0 }};
 /*
+  // uncomment this foe runtime allocation
   int **a;
 
   a=new int*[n];
@@ -89,7 +115,7 @@ int main()
   }
   */
 
-  bellman_ford(a,p,n);
+  dijkstra(a,p,n);
   disp(p,n);
 
 }
