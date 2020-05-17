@@ -4,17 +4,12 @@ using namespace std;
 int min_edge( int a[][5] ,int *t, int t1,int u, int *s, int n)
 {
   int p=100,min;
+
   for(int j=0;j<n;j++)
-  {
     for(int i=0;i<t1;i++)
-    {
       if((p>a[u][t[i]]) && s[j]!=1)
-      {
-        p=a[u][t[i]];
-        min=t[i];
-      }
-    }
-  }
+        p=a[u][t[i]], min=t[i];
+
   return min;
 }
 
@@ -32,11 +27,10 @@ void mst(int a[][5], int n)
   {
     t1=0;
     s[u]=1;
+
     for(int i=0;i<n;i++)
-    {
       if(a[u][i]!=0 && s[i]!=1)
          t[t1++]=i;
-    }
 
     me=min_edge(a,t,t1,u,s,n);
     res[j]=u=me;
