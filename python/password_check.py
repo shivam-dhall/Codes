@@ -6,7 +6,7 @@ size=0
 
 sp=['@','#','$','%']
 
-a="HG@vvv23Hgf"
+a="HG"
 
 size=len(a)
 
@@ -27,3 +27,5 @@ for j in sp:
 print(sp[0])
 if(sc>0 and l>0 and u>0 and al>0 and size >8 and size<17):
     print("Password accepted")
+else:
+    print("Not accepted")
