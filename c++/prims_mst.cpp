@@ -5,10 +5,15 @@ int min_edge( int a[][5] ,int *t, int t1,int u, int *s, int n)
 {
   int p=100,min;
 
+  for(int i=0;i<n;i++)
+    for(int j=0;j<n;j++)
+      if(a[i][j]!=0 && s[i]==1 && s[j]!=1)
+        t[t1++]=j;
+
   for(int j=0;j<n;j++)
     for(int i=0;i<t1;i++)
-      if((p>a[u][t[i]]) && s[j]!=1)
-        p=a[u][t[i]], min=t[i];
+      if((p>a[j][t[i]]) && s[j]!=1)
+        p=a[j][t[i]], min=t[i];
 
   return min;
 }
@@ -46,9 +51,9 @@ int main()
   cin>>n;
 
   int a[5][5] = { { 0, 2, 0, 6, 0 },
-                  { 2, 0, 3, 8, 5 },
+                  { 2, 0, 3, 0, 5 },
                   { 0, 3, 0, 0, 7 },
-                  { 6, 8, 0, 0, 9 },
+                  { 6, 0, 0, 0, 9 },
                   { 0, 5, 7, 9, 0 } };
 
 
@@ -72,7 +77,6 @@ int main()
     }
   }
   */
-
   mst(a,n);
 
 }
